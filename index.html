@@ -132,6 +132,22 @@
             color: #fff;
             font-weight: 400;
             letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .competitor-logo {
+            height: 32px;
+            width: auto;
+            max-width: 140px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+            opacity: 0.9;
+        }
+
+        .competitor-logo.no-invert {
+            filter: none;
         }
 
         .threat-level {
@@ -577,7 +593,7 @@
         <!-- YARDI VOI CARD -->
         <div class="card" id="yardi">
             <div class="card-header">
-                <h2 class="card-title">Yardi VOI</h2>
+                <h2 class="card-title"><img src="https://www.yardi.com/wp-content/client-mu-plugins/cmw-icons/svg/logos/yardi_logo.svg" class="competitor-logo" alt="Yardi"> VOI</h2>
                 <span class="threat-level threat-high">#1 COMPETITOR</span>
             </div>
 
@@ -698,7 +714,7 @@
         <!-- SNAPPT CARD -->
         <div class="card" id="snappt">
             <div class="card-header">
-                <h2 class="card-title">Snappt</h2>
+                <h2 class="card-title"><img src="https://d2yhxz8axzm4vn.cloudfront.net/wp-content/themes/snappt-theme/public/images/logo-snappt.svg" class="competitor-logo" alt="Snappt"></h2>
                 <span class="threat-level threat-high">#2 COMPETITOR</span>
             </div>
 
@@ -795,7 +811,7 @@
         <!-- VERIFAST CARD -->
         <div class="card" id="verifast">
             <div class="card-header">
-                <h2 class="card-title">Verifast</h2>
+                <h2 class="card-title"><img src="https://cdn.prod.website-files.com/66b5a65c7ba24a241306f3ab/68a731b46be00565cdd6ec5c_Verifast_logo.avif" class="competitor-logo no-invert" alt="Verifast"></h2>
                 <span class="threat-level threat-medium">MEDIUM THREAT</span>
             </div>
 
@@ -878,7 +894,7 @@
         <!-- FINDIGS CARD -->
         <div class="card" id="findigs">
             <div class="card-header">
-                <h2 class="card-title">Findigs</h2>
+                <h2 class="card-title"><img src="https://cdn.prod.website-files.com/65dcf4acf6071420a070fdc4/65e7a98b3248ef5e121cd18e_Findigs%20logo.svg" class="competitor-logo" alt="Findigs"></h2>
                 <span class="threat-level threat-medium">MEDIUM THREAT</span>
             </div>
 
@@ -1018,7 +1034,7 @@
         <!-- BETTER NOI CARD -->
         <div class="card" id="betternoi">
             <div class="card-header">
-                <h2 class="card-title">Better NOI / Resident Verify</h2>
+                <h2 class="card-title"><img src="https://www.betternoi.com/media/filer_public/1361/2025/06/09/logo1bn.png" class="competitor-logo no-invert" alt="BetterNOI"> / Resident Verify</h2>
                 <span class="threat-level threat-low">LOWER THREAT</span>
             </div>
 
@@ -1205,7 +1221,7 @@
         <!-- APPROVESHIELD CARD -->
         <div class="card" id="approveshield">
             <div class="card-header">
-                <h2 class="card-title">ApproveShield</h2>
+                <h2 class="card-title"><img src="https://www.approveshield.com/assets/logos/primary_grey-185a725a90e91a01fbd2fe3d4a411542dfc6cb52461200aabd18d5debdabd363.png" class="competitor-logo no-invert" alt="ApproveShield"></h2>
                 <span class="threat-level threat-medium">MEDIUM THREAT</span>
             </div>
 
