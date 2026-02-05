@@ -162,42 +162,55 @@
 
         .weakness-table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0 8px;
             border-radius: 12px;
-            overflow: hidden;
         }
 
         .weakness-table th, .weakness-table td {
-            padding: 14px 18px;
+            padding: 16px 20px;
             text-align: left;
         }
 
         .weakness-table th {
-            background: rgba(255,255,255,0.05);
-            font-weight: 500;
-            color: rgba(255,255,255,0.5);
+            background: transparent;
+            font-weight: 600;
             text-transform: uppercase;
             font-size: 0.7rem;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            padding-bottom: 8px;
+        }
+
+        .weakness-table th:first-child {
+            color: #f87171;
+        }
+
+        .weakness-table th:last-child {
+            color: #10b981;
         }
 
         .weakness-table td {
-            background: rgba(255,255,255,0.02);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
             font-size: 0.95rem;
             line-height: 1.5;
+            vertical-align: top;
         }
 
-        .weakness-table tr:last-child td {
-            border-bottom: none;
+        .weakness-table td:first-child {
+            background: rgba(248, 113, 113, 0.1);
+            border: 1px solid rgba(248, 113, 113, 0.2);
+            border-radius: 10px 0 0 10px;
+            border-right: none;
         }
 
-        .weakness-table tr:hover td {
-            background: rgba(255,255,255,0.05);
+        .weakness-table td:last-child {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 0 10px 10px 0;
+            border-left: none;
         }
 
-        .weakness-col { color: #f87171; }
-        .advantage-col { color: #10b981; }
+        .weakness-col { color: #fca5a5; }
+        .advantage-col { color: #6ee7b7; font-weight: 500; }
 
         .killer-stat {
             background: rgba(16, 185, 129, 0.08);
@@ -227,34 +240,50 @@
         }
 
         .objection-card {
-            background: rgba(255,255,255,0.03);
-            padding: 24px;
+            background: rgba(255,255,255,0.02);
+            padding: 0;
             border-radius: 14px;
-            border-left: 3px solid #10b981;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .objection-card .they-say-box {
+            background: rgba(248, 113, 113, 0.1);
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .objection-card .you-say-box {
+            background: rgba(16, 185, 129, 0.1);
+            padding: 16px 20px;
         }
 
         .objection-card .they-say {
-            color: #f87171;
+            color: #fca5a5;
             font-style: italic;
-            margin-bottom: 16px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             line-height: 1.5;
         }
 
         .objection-card .you-say {
-            color: #10b981;
-            font-size: 1rem;
+            color: #6ee7b7;
+            font-size: 0.95rem;
             line-height: 1.5;
+            font-weight: 500;
         }
 
         .objection-card .label {
             font-size: 0.65rem;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255,255,255,0.5);
             margin-bottom: 8px;
             letter-spacing: 1.5px;
-            font-weight: 500;
+            font-weight: 600;
+            display: block;
         }
+
+        .objection-card .label-they { color: #f87171; }
+        .objection-card .label-you { color: #10b981; }
 
         /* Quick Reference Card */
         .comparison-table {
@@ -296,7 +325,8 @@
         .partial { color: #f59e0b; font-size: 1.1rem; }
 
         .positioning-box {
-            background: rgba(255,255,255,0.03);
+            background: rgba(248, 113, 113, 0.05);
+            border: 1px solid rgba(248, 113, 113, 0.15);
             padding: 20px 24px;
             border-radius: 14px;
             margin-bottom: 20px;
@@ -309,7 +339,7 @@
 
         .positioning-box li {
             padding: 10px 0;
-            padding-left: 24px;
+            padding-left: 28px;
             position: relative;
             color: rgba(255,255,255,0.75);
             font-size: 0.95rem;
@@ -317,11 +347,11 @@
         }
 
         .positioning-box li::before {
-            content: '•';
+            content: '⚠';
             position: absolute;
             left: 0;
-            color: #10b981;
-            font-weight: bold;
+            color: #f87171;
+            font-size: 0.85rem;
         }
 
         .data-placeholder {
@@ -500,28 +530,44 @@
                 <h3 class="section-title">Universal Objection Handlers</h3>
                 <div class="objection-grid">
                     <div class="objection-card">
-                        <div class="label">They Say</div>
-                        <div class="they-say">"We're happy with our current vendor"</div>
-                        <div class="label">You Say</div>
-                        <div class="you-say">"Let us run a backtest on applications they approved - we'll show you what fraud slipped through"</div>
+                        <div class="they-say-box">
+                            <div class="label label-they">They Say</div>
+                            <div class="they-say">"We're happy with our current vendor"</div>
+                        </div>
+                        <div class="you-say-box">
+                            <div class="label label-you">You Say</div>
+                            <div class="you-say">"Let us run a backtest on applications they approved - we'll show you what fraud slipped through"</div>
+                        </div>
                     </div>
                     <div class="objection-card">
-                        <div class="label">They Say</div>
-                        <div class="they-say">"They're cheaper"</div>
-                        <div class="label">You Say</div>
-                        <div class="you-say">"What's the cost of one fraudster who skips rent? One eviction? We prevent those."</div>
+                        <div class="they-say-box">
+                            <div class="label label-they">They Say</div>
+                            <div class="they-say">"They're cheaper"</div>
+                        </div>
+                        <div class="you-say-box">
+                            <div class="label label-you">You Say</div>
+                            <div class="you-say">"What's the cost of one fraudster who skips rent? One eviction? We prevent those."</div>
+                        </div>
                     </div>
                     <div class="objection-card">
-                        <div class="label">They Say</div>
-                        <div class="they-say">"We're already integrated with X"</div>
-                        <div class="label">You Say</div>
-                        <div class="you-say">"TwoDots integrates with your PMS too - and catches what they miss"</div>
+                        <div class="they-say-box">
+                            <div class="label label-they">They Say</div>
+                            <div class="they-say">"We're already integrated with X"</div>
+                        </div>
+                        <div class="you-say-box">
+                            <div class="label label-you">You Say</div>
+                            <div class="you-say">"TwoDots integrates with your PMS too - and catches what they miss"</div>
+                        </div>
                     </div>
                     <div class="objection-card">
-                        <div class="label">They Say</div>
-                        <div class="they-say">"My team likes the current system"</div>
-                        <div class="label">You Say</div>
-                        <div class="you-say">"Our system is easier - we make the decisions so your team doesn't have to"</div>
+                        <div class="they-say-box">
+                            <div class="label label-they">They Say</div>
+                            <div class="they-say">"My team likes the current system"</div>
+                        </div>
+                        <div class="you-say-box">
+                            <div class="label label-you">You Say</div>
+                            <div class="you-say">"Our system is easier - we make the decisions so your team doesn't have to"</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -605,28 +651,44 @@
                 <h3 class="section-title">When You Hear This, Say This</h3>
                 <div class="objection-grid">
                     <div class="objection-card">
-                        <div class="label">They Say</div>
-                        <div class="they-say">"We're already on Yardi"</div>
-                        <div class="label">You Say</div>
-                        <div class="you-say">"TwoDots integrates with Yardi AND catches fraud Yardi misses - we can prove it with a backtest of your denied apps"</div>
+                        <div class="they-say-box">
+                            <div class="label label-they">They Say</div>
+                            <div class="they-say">"We're already on Yardi"</div>
+                        </div>
+                        <div class="you-say-box">
+                            <div class="label label-you">You Say</div>
+                            <div class="you-say">"TwoDots integrates with Yardi AND catches fraud Yardi misses - we can prove it with a backtest of your denied apps"</div>
+                        </div>
                     </div>
                     <div class="objection-card">
-                        <div class="label">They Say</div>
-                        <div class="they-say">"VOI flags CPNs"</div>
-                        <div class="label">You Say</div>
-                        <div class="you-say">"Flagging isn't enough - your leasing agents can ignore those flags. We make the call so your team doesn't have to"</div>
+                        <div class="they-say-box">
+                            <div class="label label-they">They Say</div>
+                            <div class="they-say">"VOI flags CPNs"</div>
+                        </div>
+                        <div class="you-say-box">
+                            <div class="label label-you">You Say</div>
+                            <div class="you-say">"Flagging isn't enough - your leasing agents can ignore those flags. We make the call so your team doesn't have to"</div>
+                        </div>
                     </div>
                     <div class="objection-card">
-                        <div class="label">They Say</div>
-                        <div class="they-say">"It's easier to stay in the Yardi ecosystem"</div>
-                        <div class="label">You Say</div>
-                        <div class="you-say">"We integrate seamlessly with Yardi. The question is: what's the cost of a fraudster who slips through their 40% 'frictionless' rate?"</div>
+                        <div class="they-say-box">
+                            <div class="label label-they">They Say</div>
+                            <div class="they-say">"It's easier to stay in the Yardi ecosystem"</div>
+                        </div>
+                        <div class="you-say-box">
+                            <div class="label label-you">You Say</div>
+                            <div class="you-say">"We integrate seamlessly with Yardi. The question is: what's the cost of a fraudster who slips through their 40% 'frictionless' rate?"</div>
+                        </div>
                     </div>
                     <div class="objection-card">
-                        <div class="label">They Say</div>
-                        <div class="they-say">"Our applicants have offer letters"</div>
-                        <div class="label">You Say</div>
-                        <div class="you-say">"Yardi can't verify offer letters at all. Those get pushed to your site teams to figure out - we handle them automatically."</div>
+                        <div class="they-say-box">
+                            <div class="label label-they">They Say</div>
+                            <div class="they-say">"Our applicants have offer letters"</div>
+                        </div>
+                        <div class="you-say-box">
+                            <div class="label label-you">You Say</div>
+                            <div class="you-say">"Yardi can't verify offer letters at all. Those get pushed to your site teams to figure out - we handle them automatically."</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -696,22 +758,34 @@
                 <h3 class="section-title">When You Hear This, Say This</h3>
                 <div class="objection-grid">
                     <div class="objection-card">
-                        <div class="label">They Say</div>
-                        <div class="they-say">"Snappt catches 99.8% of edited docs"</div>
-                        <div class="label">You Say</div>
-                        <div class="you-say">"Editing documents is 2019 fraud. Today's fraudsters use CPNs and synthetic IDs with REAL documents - Snappt can't touch those."</div>
+                        <div class="they-say-box">
+                            <div class="label label-they">They Say</div>
+                            <div class="they-say">"Snappt catches 99.8% of edited docs"</div>
+                        </div>
+                        <div class="you-say-box">
+                            <div class="label label-you">You Say</div>
+                            <div class="you-say">"Editing documents is 2019 fraud. Today's fraudsters use CPNs and synthetic IDs with REAL documents - Snappt can't touch those."</div>
+                        </div>
                     </div>
                     <div class="objection-card">
-                        <div class="label">They Say</div>
-                        <div class="they-say">"They process in 10 minutes"</div>
-                        <div class="label">You Say</div>
-                        <div class="you-say">"Fast document checks are easy. We investigate the whole identity in 24 hours - that's what catches the sophisticated fraud."</div>
+                        <div class="they-say-box">
+                            <div class="label label-they">They Say</div>
+                            <div class="they-say">"They process in 10 minutes"</div>
+                        </div>
+                        <div class="you-say-box">
+                            <div class="label label-you">You Say</div>
+                            <div class="you-say">"Fast document checks are easy. We investigate the whole identity in 24 hours - that's what catches the sophisticated fraud."</div>
+                        </div>
                     </div>
                     <div class="objection-card">
-                        <div class="label">They Say</div>
-                        <div class="they-say">"They're SOC 2 certified"</div>
-                        <div class="label">You Say</div>
-                        <div class="you-say">"SOC 2 is table stakes - we are too. The question is: what fraud are they missing while being compliant?"</div>
+                        <div class="they-say-box">
+                            <div class="label label-they">They Say</div>
+                            <div class="they-say">"They're SOC 2 certified"</div>
+                        </div>
+                        <div class="you-say-box">
+                            <div class="label label-you">You Say</div>
+                            <div class="you-say">"SOC 2 is table stakes - we are too. The question is: what fraud are they missing while being compliant?"</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -777,16 +851,24 @@
                 <h3 class="section-title">When You Hear This, Say This</h3>
                 <div class="objection-grid">
                     <div class="objection-card">
-                        <div class="label">They Say</div>
-                        <div class="they-say">"They have video biometric verification"</div>
-                        <div class="label">You Say</div>
-                        <div class="you-say">"Video selfies don't catch synthetic identities or CPNs. Fraudsters can pass a selfie check - it's the documents and identity data that matter."</div>
+                        <div class="they-say-box">
+                            <div class="label label-they">They Say</div>
+                            <div class="they-say">"They have video biometric verification"</div>
+                        </div>
+                        <div class="you-say-box">
+                            <div class="label label-you">You Say</div>
+                            <div class="you-say">"Video selfies don't catch synthetic identities or CPNs. Fraudsters can pass a selfie check - it's the documents and identity data that matter."</div>
+                        </div>
                     </div>
                     <div class="objection-card">
-                        <div class="label">They Say</div>
-                        <div class="they-say">"They have 35% of the Top 50"</div>
-                        <div class="label">You Say</div>
-                        <div class="you-say">"Market share doesn't mean better fraud detection. Let us run a backtest - we'll show you what they're missing."</div>
+                        <div class="they-say-box">
+                            <div class="label label-they">They Say</div>
+                            <div class="they-say">"They have 35% of the Top 50"</div>
+                        </div>
+                        <div class="you-say-box">
+                            <div class="label label-you">You Say</div>
+                            <div class="you-say">"Market share doesn't mean better fraud detection. Let us run a backtest - we'll show you what they're missing."</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -852,16 +934,24 @@
                 <h3 class="section-title">When You Hear This, Say This</h3>
                 <div class="objection-grid">
                     <div class="objection-card">
-                        <div class="label">They Say</div>
-                        <div class="they-say">"They have 3.4-hour median decision time"</div>
-                        <div class="label">You Say</div>
-                        <div class="you-say">"Speed is easy if you auto-deny on suspicion. We take time to investigate and approve more good applicants."</div>
+                        <div class="they-say-box">
+                            <div class="label label-they">They Say</div>
+                            <div class="they-say">"They have 3.4-hour median decision time"</div>
+                        </div>
+                        <div class="you-say-box">
+                            <div class="label label-you">You Say</div>
+                            <div class="you-say">"Speed is easy if you auto-deny on suspicion. We take time to investigate and approve more good applicants."</div>
+                        </div>
                     </div>
                     <div class="objection-card">
-                        <div class="label">They Say</div>
-                        <div class="they-say">"They claim 80% eviction rate reduction"</div>
-                        <div class="label">You Say</div>
-                        <div class="you-say">"Ask them how - they can't detect CPNs. If you're not catching synthetic identities, that 80% number doesn't hold up."</div>
+                        <div class="they-say-box">
+                            <div class="label label-they">They Say</div>
+                            <div class="they-say">"They claim 80% eviction rate reduction"</div>
+                        </div>
+                        <div class="you-say-box">
+                            <div class="label label-you">You Say</div>
+                            <div class="you-say">"Ask them how - they can't detect CPNs. If you're not catching synthetic identities, that 80% number doesn't hold up."</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -911,10 +1001,14 @@
                 <h3 class="section-title">When You Hear This, Say This</h3>
                 <div class="objection-grid">
                     <div class="objection-card">
-                        <div class="label">They Say</div>
-                        <div class="they-say">"They cover our application fees"</div>
-                        <div class="label">You Say</div>
-                        <div class="you-say">"What does it cost when a fraudster gets in and skips rent? We prevent that in the first place."</div>
+                        <div class="they-say-box">
+                            <div class="label label-they">They Say</div>
+                            <div class="they-say">"They cover our application fees"</div>
+                        </div>
+                        <div class="you-say-box">
+                            <div class="label label-you">You Say</div>
+                            <div class="you-say">"What does it cost when a fraudster gets in and skips rent? We prevent that in the first place."</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -979,16 +1073,24 @@
                 <h3 class="section-title">When You Hear This, Say This</h3>
                 <div class="objection-grid">
                     <div class="objection-card">
-                        <div class="label">They Say</div>
-                        <div class="they-say">"BetterNOI is an all-in-one platform"</div>
-                        <div class="label">You Say</div>
-                        <div class="you-say">"Their verification is outsourced to Snappt and Truv. You're paying for a middleman while getting Snappt's blind spots."</div>
+                        <div class="they-say-box">
+                            <div class="label label-they">They Say</div>
+                            <div class="they-say">"BetterNOI is an all-in-one platform"</div>
+                        </div>
+                        <div class="you-say-box">
+                            <div class="label label-you">You Say</div>
+                            <div class="you-say">"Their verification is outsourced to Snappt and Truv. You're paying for a middleman while getting Snappt's blind spots."</div>
+                        </div>
                     </div>
                     <div class="objection-card">
-                        <div class="label">They Say</div>
-                        <div class="they-say">"They track 17 KPIs"</div>
-                        <div class="label">You Say</div>
-                        <div class="you-say">"KPI dashboards don't catch fraudsters. What matters is stopping the bad actors before they move in."</div>
+                        <div class="they-say-box">
+                            <div class="label label-they">They Say</div>
+                            <div class="they-say">"They track 17 KPIs"</div>
+                        </div>
+                        <div class="you-say-box">
+                            <div class="label label-you">You Say</div>
+                            <div class="you-say">"KPI dashboards don't catch fraudsters. What matters is stopping the bad actors before they move in."</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1086,10 +1188,14 @@
                 <h3 class="section-title">When You Hear This, Say This</h3>
                 <div class="objection-grid">
                     <div class="objection-card">
-                        <div class="label">They Say</div>
-                        <div class="they-say">"Boom is cheaper"</div>
-                        <div class="label">You Say</div>
-                        <div class="you-say">"They're a payments company doing screening on the side. We're a screening company - it's all we do."</div>
+                        <div class="they-say-box">
+                            <div class="label label-they">They Say</div>
+                            <div class="they-say">"Boom is cheaper"</div>
+                        </div>
+                        <div class="you-say-box">
+                            <div class="label label-you">You Say</div>
+                            <div class="you-say">"They're a payments company doing screening on the side. We're a screening company - it's all we do."</div>
+                        </div>
                     </div>
                 </div>
             </div>
