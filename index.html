@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TwoDots Competitor Battlecards</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #141414;
+            min-height: 100vh;
+            color: #fff;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+            background: #141414;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            color: #fff;
+            margin-bottom: 24px;
+            text-transform: lowercase;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.5);
+            font-weight: 300;
+        }
+
+        .nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px 20px;
+            background: #141414;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 100px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            background: transparent;
+            color: rgba(255,255,255,0.6);
+            font-family: inherit;
+        }
+
+        .nav-btn:hover {
+            border-color: rgba(255,255,255,0.3);
+            color: #fff;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .nav-btn.active {
+            background: #fff;
+            border-color: #fff;
+            color: #141414;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            padding: 36px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.08);
+            display: none;
+            backdrop-filter: blur(10px);
+        }
+
+        .card.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .card-title {
+            font-size: 2rem;
+            color: #fff;
+            font-weight: 400;
+            letter-spacing: -0.3px;
+        }
+
+        .threat-level {
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-weight: 500;
+            font-size: 0.75rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .threat-high { background: #ef4444; color: #fff; }
+        .threat-medium { background: #f59e0b; color: #000; }
+        .threat-low { background: #10b981; color: #fff; }
+
+        .section {
+            margin-bottom: 36px;
+        }
+
+        .section-title {
+            font-size: 0.8rem;
+            color: #10b981;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+        }
+
+        .weakness-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .weakness-table th, .weakness-table td {
+            padding: 14px 18px;
+            text-align: left;
+        }
+
+        .weakness-table th {
+            background: rgba(255,255,255,0.05);
+            font-weight: 500;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+        }
+
+        .weakness-table td {
+            background: rgba(255,255,255,0.02);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .weakness-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .weakness-table tr:hover td {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .weakness-col { color: #f87171; }
+        .advantage-col { color: #10b981; }
+
+        .killer-stat {
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 32px;
+            border-radius: 16px;
+            text-align: center;
+            font-size: 1rem;
+            margin: 28px 0;
+            color: rgba(255,255,255,0.7);
+            font-weight: 300;
+        }
+
+        .killer-stat strong {
+            font-size: 1.3rem;
+            display: block;
+            margin-top: 12px;
+            color: #fff;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .objection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+        }
+
+        .objection-card {
+            background: rgba(255,255,255,0.03);
+            padding: 24px;
+            border-radius: 14px;
+            border-left: 3px solid #10b981;
+        }
+
+        .objection-card .they-say {
+            color: #f87171;
+            font-style: italic;
+            margin-bottom: 16px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .objection-card .you-say {
+            color: #10b981;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .objection-card .label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 8px;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+        }
+
+        /* Quick Reference Card */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 12px 14px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .comparison-table th {
+            background: rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.5);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .comparison-table td:first-child {
+            text-align: left;
+            font-weight: 400;
+            color: #fff;
+        }
+
+        .comparison-table td {
+            background: rgba(255,255,255,0.02);
+            font-size: 0.9rem;
+        }
+
+        .check { color: #10b981; font-size: 1.1rem; }
+        .cross { color: #f87171; font-size: 1.1rem; }
+        .partial { color: #f59e0b; font-size: 1.1rem; }
+
+        .positioning-box {
+            background: rgba(255,255,255,0.03);
+            padding: 20px 24px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+        }
+
+        .positioning-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .positioning-box li {
+            padding: 10px 0;
+            padding-left: 24px;
+            position: relative;
+            color: rgba(255,255,255,0.75);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .positioning-box li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .data-placeholder {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px dashed rgba(59, 130, 246, 0.3);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            color: #60a5fa;
+            margin: 25px 0;
+        }
+
+        .data-placeholder strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #93c5fd;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin: 28px 0;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.03);
+            padding: 28px 20px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .stat-value {
+            font-size: 2.4rem;
+            font-weight: 500;
+            color: #10b981;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+        }
+
+        .stat-label {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 400;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8rem; }
+            .card-title { font-size: 1.5rem; }
+            .weakness-table th, .weakness-table td { padding: 10px 12px; font-size: 0.85rem; }
+            .nav-btn { padding: 8px 14px; font-size: 0.8rem; }
+            .stat-value { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">twodots</div>
+        <h1>Competitor Battlecards</h1>
+        <p>Sales Intelligence for Winning Against the Competition</p>
+    </div>
+
+    <nav class="nav">
+        <button class="nav-btn active" onclick="showCard('overview')">Overview</button>
+        <button class="nav-btn" onclick="showCard('yardi')">Yardi VOI</button>
+        <button class="nav-btn" onclick="showCard('snappt')">Snappt</button>
+        <button class="nav-btn" onclick="showCard('verifast')">Verifast</button>
+        <button class="nav-btn" onclick="showCard('findigs')">Findigs</button>
+        <button class="nav-btn" onclick="showCard('get100')">Get 100</button>
+        <button class="nav-btn" onclick="showCard('betternoi')">Better NOI</button>
+        <button class="nav-btn" onclick="showCard('vero')">Vero</button>
+        <button class="nav-btn" onclick="showCard('boom')">Boom</button>
+    </nav>
+
+    <div class="container">
+        <!-- OVERVIEW CARD -->
+        <div class="card active" id="overview">
+            <div class="card-header">
+                <h2 class="card-title">TwoDots Competitive Advantage</h2>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">85%</div>
+                    <div class="stat-label">Approved in Under 24 Hours</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">61K+</div>
+                    <div class="stat-label">Apps Processed (90 days)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">50K+</div>
+                    <div class="stat-label">AI Fraud Investigations</div>
+                </div>
+            </div>
+
+            <div class="killer-stat">
+                Our Philosophy: Innocent Until Proven Guilty<br>
+                <strong>"We do a full AI investigation in minutes — not instant denials on suspicion"</strong>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Feature Comparison</h3>
+                <table class="comparison-table">
+                    <tr>
+                        <th>Capability</th>
+                        <th>TwoDots</th>
+                        <th>Yardi VOI</th>
+                        <th>Snappt</th>
+                        <th>Others</th>
+                    </tr>
+                    <tr>
+                        <td>CPN Detection</td>
+                        <td><span class="check">&#10004;</span></td>
+                        <td><span class="partial">~</span></td>
+                        <td><span class="cross">&#10008;</span></td>
+                        <td><span class="cross">&#10008;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Human Fraud Team</td>
+                        <td><span class="check">&#10004;</span></td>
+                        <td><span class="cross">&#10008;</span></td>
+                        <td><span class="partial">~</span></td>
+                        <td><span class="cross">&#10008;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Offer Letter Verification</td>
+                        <td><span class="check">&#10004;</span></td>
+                        <td><span class="cross">&#10008;</span></td>
+                        <td><span class="check">&#10004;</span></td>
+                        <td><span class="partial">~</span></td>
+                    </tr>
+                    <tr>
+                        <td>Complex Income Types</td>
+                        <td><span class="check">&#10004;</span></td>
+                        <td><span class="partial">~</span></td>
+                        <td><span class="partial">~</span></td>
+                        <td><span class="cross">&#10008;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Dynamic Follow-ups</td>
+                        <td><span class="check">&#10004;</span></td>
+                        <td><span class="cross">&#10008;</span></td>
+                        <td><span class="cross">&#10008;</span></td>
+                        <td><span class="cross">&#10008;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Fair Housing Indemnification</td>
+                        <td><span class="check">&#10004;</span></td>
+                        <td><span class="cross">&#10008;</span></td>
+                        <td><span class="cross">&#10008;</span></td>
+                        <td><span class="cross">&#10008;</span></td>
+                    </tr>
+                    <tr>
+                        <td>No Forced Bank Linking</td>
+                        <td><span class="check">&#10004;</span></td>
+                        <td><span class="check">&#10004;</span></td>
+                        <td><span class="check">&#10004;</span></td>
+                        <td><span class="cross">&#10008;</span></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Universal Objection Handlers</h3>
+                <div class="objection-grid">
+                    <div class="objection-card">
+                        <div class="label">They Say</div>
+                        <div class="they-say">"We're happy with our current vendor"</div>
+                        <div class="label">You Say</div>
+                        <div class="you-say">"Let us run a backtest on applications they approved - we'll show you what fraud slipped through"</div>
+                    </div>
+                    <div class="objection-card">
+                        <div class="label">They Say</div>
+                        <div class="they-say">"They're cheaper"</div>
+                        <div class="label">You Say</div>
+                        <div class="you-say">"What's the cost of one fraudster who skips rent? One eviction? We prevent those."</div>
+                    </div>
+                    <div class="objection-card">
+                        <div class="label">They Say</div>
+                        <div class="they-say">"We're already integrated with X"</div>
+                        <div class="label">You Say</div>
+                        <div class="you-say">"TwoDots integrates with your PMS too - and catches what they miss"</div>
+                    </div>
+                    <div class="objection-card">
+                        <div class="label">They Say</div>
+                        <div class="they-say">"My team likes the current system"</div>
+                        <div class="label">You Say</div>
+                        <div class="you-say">"Our system is easier - we make the decisions so your team doesn't have to"</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- YARDI VOI CARD -->
+        <div class="card" id="yardi">
+            <div class="card-header">
+                <h2 class="card-title">Yardi VOI</h2>
+                <span class="threat-level threat-high">#1 COMPETITOR</span>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Their Positioning</h3>
+                <div class="positioning-box">
+                    <ul>
+                        <li>Integrated with Yardi PMS ecosystem</li>
+                        <li>~40% "frictionless" verification rate (self-reported)</li>
+                        <li>CPN flagging capability (flags only, doesn't decide)</li>
+                        <li>Credit + background + identity verification</li>
+                        <li>Income verification through bank linking</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="killer-stat">
+                Key Differentiator<br>
+                <strong>"Yardi denies on suspicion. We investigate with AI in minutes — innocent until proven guilty."</strong>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" style="color: #f87171;">~40%</div>
+                    <div class="stat-label">Yardi's "Frictionless" Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">85%</div>
+                    <div class="stat-label">TwoDots Approved in 24hrs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" style="color: #f87171;">0%</div>
+                    <div class="stat-label">Yardi Offer Letter Verification</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Their Weaknesses vs TwoDots Advantages</h3>
+                <table class="weakness-table">
+                    <tr>
+                        <th class="weakness-col">Their Weakness</th>
+                        <th class="advantage-col">TwoDots Advantage</th>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">No human fraud team - site teams handle disputes</td>
+                        <td class="advantage-col">Dedicated fraud analysts reviewing escalations</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">CPN flags can be ignored by leasing agents</td>
+                        <td class="advantage-col">TwoDots makes definitive decisions on CPNs</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Cannot verify offer letters at all</td>
+                        <td class="advantage-col">Verifies ALL document types including offer letters</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Hardest cases pushed to site teams</td>
+                        <td class="advantage-col">Handles complex cases with AI + human review</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Lets through fake paystubs</td>
+                        <td class="advantage-col">Catches edited documents (provable via backtest)</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Compliance risk - may deny wrong people</td>
+                        <td class="advantage-col">Offers indemnification protection</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">When You Hear This, Say This</h3>
+                <div class="objection-grid">
+                    <div class="objection-card">
+                        <div class="label">They Say</div>
+                        <div class="they-say">"We're already on Yardi"</div>
+                        <div class="label">You Say</div>
+                        <div class="you-say">"TwoDots integrates with Yardi AND catches fraud Yardi misses - we can prove it with a backtest of your denied apps"</div>
+                    </div>
+                    <div class="objection-card">
+                        <div class="label">They Say</div>
+                        <div class="they-say">"VOI flags CPNs"</div>
+                        <div class="label">You Say</div>
+                        <div class="you-say">"Flagging isn't enough - your leasing agents can ignore those flags. We make the call so your team doesn't have to"</div>
+                    </div>
+                    <div class="objection-card">
+                        <div class="label">They Say</div>
+                        <div class="they-say">"It's easier to stay in the Yardi ecosystem"</div>
+                        <div class="label">You Say</div>
+                        <div class="you-say">"We integrate seamlessly with Yardi. The question is: what's the cost of a fraudster who slips through their 40% 'frictionless' rate?"</div>
+                    </div>
+                    <div class="objection-card">
+                        <div class="label">They Say</div>
+                        <div class="they-say">"Our applicants have offer letters"</div>
+                        <div class="label">You Say</div>
+                        <div class="you-say">"Yardi can't verify offer letters at all. Those get pushed to your site teams to figure out - we handle them automatically."</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SNAPPT CARD -->
+        <div class="card" id="snappt">
+            <div class="card-header">
+                <h2 class="card-title">Snappt</h2>
+                <span class="threat-level threat-high">#2 COMPETITOR</span>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Their Positioning</h3>
+                <div class="positioning-box">
+                    <ul>
+                        <li>Claims 99.8% edited document detection accuracy</li>
+                        <li>1.2M+ units protected</li>
+                        <li>10-minute processing on document rulings</li>
+                        <li>16M+ document training set</li>
+                        <li>90% US payroll provider integration</li>
+                        <li>SOC 2 Type II certified, BBB A+ rated</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="killer-stat">
+                The Critical Gap<br>
+                <strong>"They catch edited PDFs — but fraudsters have evolved. CPNs and synthetic IDs are the real threat now."</strong>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Their Weaknesses vs TwoDots Advantages</h3>
+                <table class="weakness-table">
+                    <tr>
+                        <th class="weakness-col">Their Weakness</th>
+                        <th class="advantage-col">TwoDots Advantage</th>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">CANNOT detect CPNs at all</td>
+                        <td class="advantage-col">Robust CPN detection built-in</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Only catches document edits - not identity fraud</td>
+                        <td class="advantage-col">Verifies identity authenticity + detects synthetic IDs</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Misses fraud that uses real documents</td>
+                        <td class="advantage-col">Full AI investigation regardless of document quality</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">No dynamic applicant follow-ups</td>
+                        <td class="advantage-col">Proactively follows up with applicants</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Requires original PDFs for best accuracy</td>
+                        <td class="advantage-col">Handles all document formats including photos</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">No indemnification protection</td>
+                        <td class="advantage-col">Fair Housing indemnification included</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">When You Hear This, Say This</h3>
+                <div class="objection-grid">
+                    <div class="objection-card">
+                        <div class="label">They Say</div>
+                        <div class="they-say">"Snappt catches 99.8% of edited docs"</div>
+                        <div class="label">You Say</div>
+                        <div class="you-say">"Editing documents is 2019 fraud. Today's fraudsters use CPNs and synthetic IDs with REAL documents - Snappt can't touch those."</div>
+                    </div>
+                    <div class="objection-card">
+                        <div class="label">They Say</div>
+                        <div class="they-say">"They process in 10 minutes"</div>
+                        <div class="label">You Say</div>
+                        <div class="you-say">"Fast document checks are easy. We investigate the whole identity in 24 hours - that's what catches the sophisticated fraud."</div>
+                    </div>
+                    <div class="objection-card">
+                        <div class="label">They Say</div>
+                        <div class="they-say">"They're SOC 2 certified"</div>
+                        <div class="label">You Say</div>
+                        <div class="you-say">"SOC 2 is table stakes - we are too. The question is: what fraud are they missing while being compliant?"</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VERIFAST CARD -->
+        <div class="card" id="verifast">
+            <div class="card-header">
+                <h2 class="card-title">Verifast</h2>
+                <span class="threat-level threat-medium">MEDIUM THREAT</span>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Their Positioning</h3>
+                <div class="positioning-box">
+                    <ul>
+                        <li>Claims 35% of NMHC Top 50 as clients</li>
+                        <li>60-minute processing time</li>
+                        <li>Claims 42% reduction in false positives</li>
+                        <li>Video biometric "proof of life" ID matching</li>
+                        <li>Direct bank + payroll connections</li>
+                        <li>2,000+ five-star Trustpilot reviews</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="killer-stat">
+                Key Insight<br>
+                <strong>"They have flashy features but can't detect CPNs or verify offer letters — the fraud that actually costs you"</strong>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Their Weaknesses vs TwoDots Advantages</h3>
+                <table class="weakness-table">
+                    <tr>
+                        <th class="weakness-col">Their Weakness</th>
+                        <th class="advantage-col">TwoDots Advantage</th>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">No CPN detection capability</td>
+                        <td class="advantage-col">Robust CPN detection built-in</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Cannot verify offer letters</td>
+                        <td class="advantage-col">Verifies ALL document types including offer letters</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Heavy bank-linking dependency</td>
+                        <td class="advantage-col">Works with documents OR bank link - applicant choice</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">"90% increase in efficiency" - vague metric</td>
+                        <td class="advantage-col">85% of approvals in under 24 hours - concrete result</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">No fraud investigation team</td>
+                        <td class="advantage-col">AI + human fraud analysts review complex cases</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">When You Hear This, Say This</h3>
+                <div class="objection-grid">
+                    <div class="objection-card">
+                        <div class="label">They Say</div>
+                        <div class="they-say">"They have video biometric verification"</div>
+                        <div class="label">You Say</div>
+                        <div class="you-say">"Video selfies don't catch synthetic identities or CPNs. Fraudsters can pass a selfie check - it's the documents and identity data that matter."</div>
+                    </div>
+                    <div class="objection-card">
+                        <div class="label">They Say</div>
+                        <div class="they-say">"They have 35% of the Top 50"</div>
+                        <div class="label">You Say</div>
+                        <div class="you-say">"Market share doesn't mean better fraud detection. Let us run a backtest - we'll show you what they're missing."</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FINDIGS CARD -->
+        <div class="card" id="findigs">
+            <div class="card-header">
+                <h2 class="card-title">Findigs</h2>
+                <span class="threat-level threat-medium">MEDIUM THREAT</span>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Their Positioning</h3>
+                <div class="positioning-box">
+                    <ul>
+                        <li>AI-native screening platform</li>
+                        <li>3.4-hour median decision time</li>
+                        <li>Claims 80% eviction rate reduction</li>
+                        <li>45% of applications decisioned outside business hours</li>
+                        <li>Built-in pet screening</li>
+                        <li>Policy optimization tools</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="killer-stat">
+                Insider Advantage<br>
+                <strong>"Our CEO used to work at Findigs — we know exactly where they fall short"</strong>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Their Weaknesses vs TwoDots Advantages</h3>
+                <table class="weakness-table">
+                    <tr>
+                        <th class="weakness-col">Their Weakness</th>
+                        <th class="advantage-col">TwoDots Advantage</th>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">CANNOT detect CPNs</td>
+                        <td class="advantage-col">Full CPN detection capability</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Black-box AI decisions - no transparency</td>
+                        <td class="advantage-col">Clear reasoning provided with every decision</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Pivoting to fintech (alternative deposits)</td>
+                        <td class="advantage-col">Screening is our core focus - not a side project</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Limited technical specs on fraud detection</td>
+                        <td class="advantage-col">Transparent methodology + human fraud team</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">No published accuracy metrics</td>
+                        <td class="advantage-col">85% of approvals in under 24 hours - proven results</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">When You Hear This, Say This</h3>
+                <div class="objection-grid">
+                    <div class="objection-card">
+                        <div class="label">They Say</div>
+                        <div class="they-say">"They have 3.4-hour median decision time"</div>
+                        <div class="label">You Say</div>
+                        <div class="you-say">"Speed is easy if you auto-deny on suspicion. We take time to investigate and approve more good applicants."</div>
+                    </div>
+                    <div class="objection-card">
+                        <div class="label">They Say</div>
+                        <div class="they-say">"They claim 80% eviction rate reduction"</div>
+                        <div class="label">You Say</div>
+                        <div class="you-say">"Ask them how - they can't detect CPNs. If you're not catching synthetic identities, that 80% number doesn't hold up."</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GET 100 CARD -->
+        <div class="card" id="get100">
+            <div class="card-header">
+                <h2 class="card-title">Get 100</h2>
+                <span class="threat-level threat-medium">MEDIUM THREAT</span>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Their Positioning</h3>
+                <div class="positioning-box">
+                    <ul>
+                        <li>Collects application fees, pays owners on backend</li>
+                        <li>Popular payment model</li>
+                        <li>High approval rates</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Their Weaknesses vs TwoDots Advantages</h3>
+                <table class="weakness-table">
+                    <tr>
+                        <th class="weakness-col">Their Weakness</th>
+                        <th class="advantage-col">TwoDots Advantage</th>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Misses enormous amount of fraud</td>
+                        <td class="advantage-col">Comprehensive fraud detection</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">No CPN detection</td>
+                        <td class="advantage-col">Full CPN detection capability</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Approves too many people - lets in fraudsters</td>
+                        <td class="advantage-col">Balances approval rate with fraud protection</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">When You Hear This, Say This</h3>
+                <div class="objection-grid">
+                    <div class="objection-card">
+                        <div class="label">They Say</div>
+                        <div class="they-say">"They cover our application fees"</div>
+                        <div class="label">You Say</div>
+                        <div class="you-say">"What does it cost when a fraudster gets in and skips rent? We prevent that in the first place."</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BETTER NOI CARD -->
+        <div class="card" id="betternoi">
+            <div class="card-header">
+                <h2 class="card-title">Better NOI / Resident Verify</h2>
+                <span class="threat-level threat-low">LOWER THREAT</span>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Their Positioning</h3>
+                <div class="positioning-box">
+                    <ul>
+                        <li>Integrated leasing platform (SEARCH, LEASE, LIVE, UNDERSTAND)</li>
+                        <li>Lead aggregation and attribution tracking</li>
+                        <li>Automated rent collection communications</li>
+                        <li>Blue Moon lease signing integration</li>
+                        <li>Tracks 17 KPIs for property performance</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="killer-stat">
+                Critical Insight<br>
+                <strong>"They partner with Truv and Snappt for verification — they don't do it themselves. You're getting Snappt's limitations."</strong>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Their Weaknesses vs TwoDots Advantages</h3>
+                <table class="weakness-table">
+                    <tr>
+                        <th class="weakness-col">Their Weakness</th>
+                        <th class="advantage-col">TwoDots Advantage</th>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Resells Truv + Snappt - not their own tech</td>
+                        <td class="advantage-col">Purpose-built verification technology</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">No published accuracy metrics</td>
+                        <td class="advantage-col">85% of approvals in under 24 hours - proven</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">No transparent pricing</td>
+                        <td class="advantage-col">Clear, predictable pricing</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Inherits Snappt's CPN blind spot</td>
+                        <td class="advantage-col">Full CPN detection capability</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Jack of all trades, master of none</td>
+                        <td class="advantage-col">Screening-focused experts</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">When You Hear This, Say This</h3>
+                <div class="objection-grid">
+                    <div class="objection-card">
+                        <div class="label">They Say</div>
+                        <div class="they-say">"BetterNOI is an all-in-one platform"</div>
+                        <div class="label">You Say</div>
+                        <div class="you-say">"Their verification is outsourced to Snappt and Truv. You're paying for a middleman while getting Snappt's blind spots."</div>
+                    </div>
+                    <div class="objection-card">
+                        <div class="label">They Say</div>
+                        <div class="they-say">"They track 17 KPIs"</div>
+                        <div class="label">You Say</div>
+                        <div class="you-say">"KPI dashboards don't catch fraudsters. What matters is stopping the bad actors before they move in."</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VERO CARD -->
+        <div class="card" id="vero">
+            <div class="card-header">
+                <h2 class="card-title">Vero</h2>
+                <span class="threat-level threat-low">LOWER THREAT</span>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Their Positioning</h3>
+                <div class="positioning-box">
+                    <ul>
+                        <li>Small player in the space</li>
+                        <li>Was innovative, now acquired by PE</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Their Weaknesses vs TwoDots Advantages</h3>
+                <table class="weakness-table">
+                    <tr>
+                        <th class="weakness-col">Their Weakness</th>
+                        <th class="advantage-col">TwoDots Advantage</th>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Founders left, acquired by PE</td>
+                        <td class="advantage-col">Founder-led and actively innovating</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Stopped innovating</td>
+                        <td class="advantage-col">Continuously improves AI and adds features</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Can't do complex income</td>
+                        <td class="advantage-col">Handles all income types</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Yardi integration problems</td>
+                        <td class="advantage-col">Reliable PMS integrations</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- BOOM CARD -->
+        <div class="card" id="boom">
+            <div class="card-header">
+                <h2 class="card-title">Boom</h2>
+                <span class="threat-level threat-low">LOWER THREAT</span>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Their Positioning</h3>
+                <div class="positioning-box">
+                    <ul>
+                        <li>Cheap pricing</li>
+                        <li>Payments-focused company</li>
+                        <li>Screening is secondary product</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Their Weaknesses vs TwoDots Advantages</h3>
+                <table class="weakness-table">
+                    <tr>
+                        <th class="weakness-col">Their Weakness</th>
+                        <th class="advantage-col">TwoDots Advantage</th>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Hard to setup to get all features</td>
+                        <td class="advantage-col">Easy to implement</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Doesn't integrate well with Yardi</td>
+                        <td class="advantage-col">Strong Yardi integration</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">Screening is NOT their main product</td>
+                        <td class="advantage-col">Screening is our core focus</td>
+                    </tr>
+                    <tr>
+                        <td class="weakness-col">"Promise the moon, deliver nothing"</td>
+                        <td class="advantage-col">Delivers measurable results</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">When You Hear This, Say This</h3>
+                <div class="objection-grid">
+                    <div class="objection-card">
+                        <div class="label">They Say</div>
+                        <div class="they-say">"Boom is cheaper"</div>
+                        <div class="label">You Say</div>
+                        <div class="you-say">"They're a payments company doing screening on the side. We're a screening company - it's all we do."</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showCard(cardId) {
+            // Hide all cards
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.remove('active');
+            });
+
+            // Remove active from all nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected card
+            document.getElementById(cardId).classList.add('active');
+
+            // Add active to clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
