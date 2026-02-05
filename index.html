@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TwoDots Competitor Battlecards</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
         * {
             margin: 0;
@@ -13,106 +13,144 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --cream: #f5f2ed;
+            --warm-white: #faf8f5;
+            --sand: #e8e3db;
+            --charcoal: #1a1a1a;
+            --slate: #4a4a4a;
+            --emerald: #10b981;
+            --emerald-dark: #059669;
+            --coral: #e07a5f;
+            --coral-light: #f4a582;
+            --terracotta: #c96f53;
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #141414;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--warm-white) 50%, var(--sand) 100%);
             min-height: 100vh;
-            color: #fff;
+            color: var(--charcoal);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
         .header {
             text-align: center;
-            padding: 60px 20px;
-            background: #141414;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding: 80px 20px 60px;
+            background: linear-gradient(180deg, var(--warm-white) 0%, transparent 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 80%, rgba(224, 122, 95, 0.06) 0%, transparent 40%);
+            pointer-events: none;
         }
 
         .logo {
-            margin-bottom: 24px;
+            margin-bottom: 28px;
+            position: relative;
         }
 
         .logo img {
-            height: 28px;
+            height: 32px;
             width: auto;
+            filter: brightness(0);
         }
 
         .header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 12px;
-            font-weight: 400;
-            letter-spacing: -0.5px;
+            font-size: 3.2rem;
+            margin-bottom: 16px;
+            font-weight: 600;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, var(--charcoal) 0%, var(--slate) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
         }
 
         .header p {
-            font-size: 1.05rem;
-            color: rgba(255,255,255,0.5);
-            font-weight: 300;
+            font-size: 1.1rem;
+            color: var(--slate);
+            font-weight: 400;
+            position: relative;
         }
 
         .nav {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 8px;
-            padding: 16px 20px;
-            background: #141414;
+            gap: 10px;
+            padding: 20px 20px;
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(20px);
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.03);
         }
 
         .nav-btn {
-            padding: 10px 20px;
-            border: 1px solid rgba(255,255,255,0.15);
+            padding: 12px 24px;
+            border: 2px solid transparent;
             border-radius: 100px;
             cursor: pointer;
             font-size: 0.85rem;
-            font-weight: 400;
-            transition: all 0.2s ease;
-            background: transparent;
-            color: rgba(255,255,255,0.6);
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(0,0,0,0.04);
+            color: var(--slate);
             font-family: inherit;
         }
 
         .nav-btn:hover {
-            border-color: rgba(255,255,255,0.3);
-            color: #fff;
-            background: rgba(255,255,255,0.05);
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--emerald-dark);
+            transform: translateY(-2px);
         }
 
         .nav-btn.active {
-            background: #fff;
-            border-color: #fff;
-            color: #141414;
-            font-weight: 500;
+            background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-dark) 100%);
+            border-color: transparent;
+            color: #fff;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
         }
 
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 40px 24px;
+            padding: 50px 24px;
         }
 
         .card {
-            background: rgba(255,255,255,0.03);
-            border-radius: 20px;
-            padding: 36px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 24px;
+            padding: 44px;
             margin-bottom: 30px;
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid rgba(0,0,0,0.06);
             display: none;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
         }
 
         .card.active {
             display: block;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -120,232 +158,289 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 32px;
+            margin-bottom: 36px;
             flex-wrap: wrap;
             gap: 16px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 28px;
+            border-bottom: 2px solid var(--sand);
         }
 
         .card-title {
-            font-size: 2rem;
-            color: #fff;
-            font-weight: 400;
-            letter-spacing: -0.3px;
+            font-size: 2.2rem;
+            color: var(--charcoal);
+            font-weight: 600;
+            letter-spacing: -0.5px;
             display: flex;
             align-items: center;
             gap: 16px;
         }
 
         .competitor-logo {
-            height: 36px;
+            height: 38px;
             width: auto;
             max-width: 180px;
             object-fit: contain;
-            filter: brightness(0) invert(1);
-            opacity: 0.9;
+            filter: grayscale(100%) brightness(0.3);
+            opacity: 0.85;
+            transition: all 0.3s ease;
+        }
+
+        .competitor-logo:hover {
+            filter: none;
+            opacity: 1;
         }
 
         .competitor-logo.no-invert {
+            filter: grayscale(100%) brightness(0.3);
+        }
+
+        .competitor-logo.no-invert:hover {
             filter: none;
         }
 
         .threat-level {
-            padding: 8px 16px;
+            padding: 10px 20px;
             border-radius: 100px;
-            font-weight: 500;
-            font-size: 0.75rem;
-            letter-spacing: 0.3px;
+            font-weight: 600;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
             text-transform: uppercase;
         }
 
-        .threat-high { background: #ef4444; color: #fff; }
-        .threat-medium { background: #f59e0b; color: #000; }
-        .threat-low { background: #10b981; color: #fff; }
+        .threat-high {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+        .threat-medium {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+        .threat-low {
+            background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-dark) 100%);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
 
         .section {
-            margin-bottom: 36px;
+            margin-bottom: 40px;
         }
 
         .section-title {
-            font-size: 0.8rem;
-            color: #10b981;
-            margin-bottom: 16px;
+            font-size: 0.75rem;
+            color: var(--emerald-dark);
+            margin-bottom: 18px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 500;
+            letter-spacing: 2px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 24px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--emerald) 0%, var(--emerald-dark) 100%);
+            border-radius: 2px;
         }
 
         .weakness-table {
             width: 100%;
             border-collapse: separate;
-            border-spacing: 0 8px;
-            border-radius: 12px;
+            border-spacing: 0 10px;
+            border-radius: 16px;
         }
 
         .weakness-table th, .weakness-table td {
-            padding: 16px 20px;
+            padding: 18px 24px;
             text-align: left;
         }
 
         .weakness-table th {
             background: transparent;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
             font-size: 0.7rem;
             letter-spacing: 1.5px;
-            padding-bottom: 8px;
+            padding-bottom: 10px;
         }
 
         .weakness-table th:first-child {
-            color: #f87171;
+            color: var(--coral);
         }
 
         .weakness-table th:last-child {
-            color: #10b981;
+            color: var(--emerald-dark);
         }
 
         .weakness-table td {
             font-size: 0.95rem;
-            line-height: 1.5;
+            line-height: 1.6;
             vertical-align: top;
         }
 
         .weakness-table td:first-child {
-            background: rgba(248, 113, 113, 0.1);
-            border: 1px solid rgba(248, 113, 113, 0.2);
-            border-radius: 10px 0 0 10px;
+            background: linear-gradient(135deg, rgba(224, 122, 95, 0.12) 0%, rgba(224, 122, 95, 0.06) 100%);
+            border: 2px solid rgba(224, 122, 95, 0.2);
+            border-radius: 14px 0 0 14px;
             border-right: none;
         }
 
         .weakness-table td:last-child {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            border-radius: 0 10px 10px 0;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0.06) 100%);
+            border: 2px solid rgba(16, 185, 129, 0.2);
+            border-radius: 0 14px 14px 0;
             border-left: none;
         }
 
-        .weakness-col { color: #fca5a5; }
-        .advantage-col { color: #6ee7b7; font-weight: 500; }
+        .weakness-col { color: var(--terracotta); }
+        .advantage-col { color: var(--emerald-dark); font-weight: 600; }
 
         .killer-stat {
-            background: rgba(16, 185, 129, 0.08);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            padding: 32px;
-            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+            border: 2px solid rgba(16, 185, 129, 0.2);
+            padding: 40px;
+            border-radius: 20px;
             text-align: center;
-            font-size: 1rem;
-            margin: 28px 0;
-            color: rgba(255,255,255,0.7);
-            font-weight: 300;
+            font-size: 1.05rem;
+            margin: 32px 0;
+            color: var(--slate);
+            font-weight: 400;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .killer-stat::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--emerald) 0%, var(--emerald-dark) 100%);
         }
 
         .killer-stat strong {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             display: block;
-            margin-top: 12px;
-            color: #fff;
-            font-weight: 500;
-            line-height: 1.4;
+            margin-top: 14px;
+            color: var(--charcoal);
+            font-weight: 600;
+            line-height: 1.5;
         }
 
         .objection-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
         }
 
         .objection-card {
-            background: rgba(255,255,255,0.02);
+            background: var(--warm-white);
             padding: 0;
-            border-radius: 14px;
+            border-radius: 18px;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid rgba(0,0,0,0.06);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .objection-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
         }
 
         .objection-card .they-say-box {
-            background: rgba(248, 113, 113, 0.1);
-            padding: 16px 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            background: linear-gradient(135deg, rgba(224, 122, 95, 0.15) 0%, rgba(224, 122, 95, 0.08) 100%);
+            padding: 20px 24px;
+            border-bottom: 1px solid rgba(224, 122, 95, 0.15);
         }
 
         .objection-card .you-say-box {
-            background: rgba(16, 185, 129, 0.1);
-            padding: 16px 20px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.08) 100%);
+            padding: 20px 24px;
         }
 
         .objection-card .they-say {
-            color: #fca5a5;
+            color: var(--terracotta);
             font-style: italic;
             font-size: 0.95rem;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .objection-card .you-say {
-            color: #6ee7b7;
+            color: var(--emerald-dark);
             font-size: 0.95rem;
-            line-height: 1.5;
-            font-weight: 500;
+            line-height: 1.6;
+            font-weight: 600;
         }
 
         .objection-card .label {
             font-size: 0.65rem;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.5);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             letter-spacing: 1.5px;
-            font-weight: 600;
+            font-weight: 700;
             display: block;
         }
 
-        .objection-card .label-they { color: #f87171; }
-        .objection-card .label-you { color: #10b981; }
+        .objection-card .label-they { color: var(--coral); }
+        .objection-card .label-you { color: var(--emerald); }
 
         /* Quick Reference Card */
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
         }
 
         .comparison-table th, .comparison-table td {
-            padding: 12px 14px;
+            padding: 16px 18px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid var(--sand);
         }
 
         .comparison-table th {
-            background: rgba(255,255,255,0.05);
-            color: rgba(255,255,255,0.5);
+            background: linear-gradient(135deg, var(--charcoal) 0%, var(--slate) 100%);
+            color: #fff;
             font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 500;
+            letter-spacing: 1px;
+            font-weight: 600;
         }
 
         .comparison-table td:first-child {
             text-align: left;
-            font-weight: 400;
-            color: #fff;
+            font-weight: 500;
+            color: var(--charcoal);
+            background: rgba(0,0,0,0.02);
         }
 
         .comparison-table td {
-            background: rgba(255,255,255,0.02);
+            background: var(--warm-white);
             font-size: 0.9rem;
         }
 
-        .check { color: #10b981; font-size: 1.1rem; }
-        .cross { color: #f87171; font-size: 1.1rem; }
-        .partial { color: #f59e0b; font-size: 1.1rem; }
+        .comparison-table tr:hover td {
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .check { color: var(--emerald); font-size: 1.2rem; font-weight: bold; }
+        .cross { color: var(--coral); font-size: 1.2rem; font-weight: bold; }
+        .partial { color: #d97706; font-size: 1.2rem; font-weight: bold; }
 
         .positioning-box {
-            background: rgba(248, 113, 113, 0.05);
-            border: 1px solid rgba(248, 113, 113, 0.15);
-            padding: 20px 24px;
-            border-radius: 14px;
-            margin-bottom: 20px;
+            background: linear-gradient(135deg, rgba(224, 122, 95, 0.08) 0%, rgba(224, 122, 95, 0.03) 100%);
+            border: 2px solid rgba(224, 122, 95, 0.15);
+            padding: 24px 28px;
+            border-radius: 18px;
+            margin-bottom: 24px;
         }
 
         .positioning-box ul {
@@ -354,76 +449,99 @@
         }
 
         .positioning-box li {
-            padding: 10px 0;
-            padding-left: 28px;
+            padding: 12px 0;
+            padding-left: 32px;
             position: relative;
-            color: rgba(255,255,255,0.75);
+            color: var(--slate);
             font-size: 0.95rem;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .positioning-box li::before {
             content: '⚠';
             position: absolute;
             left: 0;
-            color: #f87171;
-            font-size: 0.85rem;
+            color: var(--coral);
+            font-size: 0.9rem;
         }
 
         .data-placeholder {
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px dashed rgba(59, 130, 246, 0.3);
-            padding: 20px;
-            border-radius: 12px;
+            background: rgba(59, 130, 246, 0.08);
+            border: 2px dashed rgba(59, 130, 246, 0.25);
+            padding: 24px;
+            border-radius: 16px;
             text-align: center;
-            color: #60a5fa;
+            color: #3b82f6;
             margin: 25px 0;
         }
 
         .data-placeholder strong {
             display: block;
-            margin-bottom: 5px;
-            color: #93c5fd;
+            margin-bottom: 8px;
+            color: #2563eb;
         }
 
         /* Stats Grid */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 16px;
-            margin: 28px 0;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 32px 0;
         }
 
         .stat-card {
-            background: rgba(255,255,255,0.03);
-            padding: 28px 20px;
-            border-radius: 16px;
+            background: linear-gradient(135deg, var(--warm-white) 0%, #fff 100%);
+            padding: 32px 24px;
+            border-radius: 20px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 2px solid var(--sand);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--emerald) 0%, var(--emerald-dark) 100%);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(16, 185, 129, 0.15);
+            border-color: rgba(16, 185, 129, 0.3);
         }
 
         .stat-value {
-            font-size: 2.4rem;
-            font-weight: 500;
-            color: #10b981;
-            margin-bottom: 8px;
-            letter-spacing: -1px;
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
         }
 
         .stat-label {
-            color: rgba(255,255,255,0.5);
+            color: var(--slate);
             font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 400;
+            letter-spacing: 1px;
+            font-weight: 500;
         }
 
         @media (max-width: 768px) {
-            .header h1 { font-size: 1.8rem; }
-            .card-title { font-size: 1.5rem; }
-            .weakness-table th, .weakness-table td { padding: 10px 12px; font-size: 0.85rem; }
-            .nav-btn { padding: 8px 14px; font-size: 0.8rem; }
-            .stat-value { font-size: 2rem; }
+            .header h1 { font-size: 2.2rem; }
+            .card-title { font-size: 1.6rem; }
+            .weakness-table th, .weakness-table td { padding: 12px 14px; font-size: 0.85rem; }
+            .nav-btn { padding: 10px 16px; font-size: 0.8rem; }
+            .stat-value { font-size: 2.2rem; }
+            .card { padding: 28px; }
         }
     </style>
 </head>
@@ -431,7 +549,7 @@
     <div class="header">
         <div class="logo"><img src="https://cdn.prod.website-files.com/68e55a3fff11bea11db40003/68e55a3fff11bea11db4016e_logo-white-cropped.svg" alt="TwoDots"></div>
         <h1>Competitor Battlecards</h1>
-        <p>Sales Intelligence for Winning Against the Competition</p>
+        <p>Win Every Deal — Your Playbook Against the Competition</p>
     </div>
 
     <nav class="nav">
@@ -451,7 +569,7 @@
         <!-- OVERVIEW CARD -->
         <div class="card active" id="overview">
             <div class="card-header">
-                <h2 class="card-title"><img src="https://cdn.prod.website-files.com/68e55a3fff11bea11db40003/68e55a3fff11bea11db4016e_logo-white-cropped.svg" style="height: 40px; width: auto; margin-right: 8px;" alt="TwoDots"> Competitive Advantage</h2>
+                <h2 class="card-title"><img src="https://cdn.prod.website-files.com/68e55a3fff11bea11db40003/68e55a3fff11bea11db4016e_logo-white-cropped.svg" style="height: 44px; width: auto; margin-right: 8px; filter: brightness(0);" alt="TwoDots"> Competitive Advantage</h2>
             </div>
 
             <div class="stats-grid">
@@ -617,7 +735,7 @@
 
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-value" style="color: #f87171;">~40%</div>
+                    <div class="stat-value" style="color: #e07a5f; -webkit-text-fill-color: #e07a5f;">~40%</div>
                     <div class="stat-label">Yardi's "Frictionless" Rate</div>
                 </div>
                 <div class="stat-card">
@@ -625,7 +743,7 @@
                     <div class="stat-label">TwoDots Approved in 24hrs</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value" style="color: #f87171;">0%</div>
+                    <div class="stat-value" style="color: #e07a5f; -webkit-text-fill-color: #e07a5f;">0%</div>
                     <div class="stat-label">Yardi Offer Letter Verification</div>
                 </div>
             </div>
